@@ -1,0 +1,67 @@
+<html>
+
+  <head>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.2.1/nouislider.min.css" rel="stylesheet">
+      <script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/3.2.2/www/src/brython.js"></script>
+  </head>
+
+  <body onload="brython()">
+      
+      <p></p>
+     
+     
+     
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.2.1/nouislider.min.js"></script>
+
+      <p>Minutes</p>
+      <div id="slider-range"></div>
+      <span id="slider-range-value"></span>
+      <script>
+      /*
+         var rangeSlider = document.getElementById('slider-range');
+         
+         noUiSlider.create(rangeSlider, {
+         	start: [250],
+         	range: {
+         		'min': [0],
+         		'50%': [1000],
+         		'max': [5000]
+         	}
+         });
+         var rangeSliderValueElement = document.getElementById('slider-range-value');
+
+         rangeSlider.noUiSlider.on('update', function( values, handle ) {
+         	rangeSliderValueElement.innerHTML = Math.round(values[handle]/10)*10;
+         });
+      */
+      </script>
+
+      <form id="theform">
+      Minutes: <input type="text" id="minutes" value=150><br>
+      Texts: <input type="text" id="texts" value=250><br>
+      Megabytes: <input type="text" id="megabytes" value=0><br>
+      </form>
+      <div id="output" style="white-space: pre-wrap;"></div>
+      
+      
+      <script type="text/python" src="https://dl.dropboxusercontent.com/s/ew224xaummdpuiq/CellPlans.py?dl=0">
+
+   def OnFormChange(evt):
+      evt.stopPropogation()
+      evt.preventDefault()
+      devices = []
+      devices.append(SmartPhone(megabytes=int(document['megabytes'].value),\
+                          minutes=int(document['minutes'].value), \
+                             texts=int(document['texts'].value)))
+      #devices.append(SmartPhone(megabytes=0, minutes=500, texts=500))
+      #devices.append(TalkTextPhone(megabytes=0, minutes=200, texts=1000))
+      foo = ProcessDevices(devices)
+      document['output'].text += foo
+   
+   OnFormChange()
+   document['output'].text = "FOO"
+   document['theform'].onchange = OnFormChange
+      </script>
+  </body>
+
+</html>
